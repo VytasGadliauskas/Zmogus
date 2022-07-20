@@ -40,7 +40,7 @@
                                                  } else {
                                                      alga = "0";
                                                  } %>
-                      <label for="alga">Alga:</label><input type="number" name="alga" min="1" value="<%= alga %>" step="any"><br>
+                      <label for="alga">Alga:</label><input type="number" name="alga" min="0" value="<%= alga %>" step="any"><br>
                       <input type="image" src="img/submit-user.png" alt="Add" width="40" height="42">
                      </form>
                    </div>

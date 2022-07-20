@@ -27,5 +27,3 @@ M
 src/main/webapp/css/style.css,2/c/2c1f525046eaa5ad3e39cc3d3b2f4c4fab4ff318
 L
 src/main/webapp/js/script.js,a/4/a48403258fe4818219eb066d53485a1f30081afd
-9
-	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d

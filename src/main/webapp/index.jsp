@@ -21,7 +21,7 @@
              <label for="pavarde">Pavarde:</label><input type="text" name="pavarde"><br>
              <label for="gdata">Gimimo data:</label>
                <input type="date" name="gdata" placeholder="yyyy-mm-dd"><br>
-             <label for="alga">Alga:</label><input type="number" name="alga" min="1" step="any" ><br>
+             <label for="alga">Alga:</label><input type="number" name="alga" min="0" step="any" ><br>
              <input type="image" src="img/add-user.png" alt="Add" width="40" height="42">
             </form>
           </div>
