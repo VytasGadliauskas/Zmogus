@@ -21,7 +21,7 @@
              <label for="pavarde">Pavarde:</label><input type="text" name="pavarde"><br>
              <label for="gdata">Gimimo data:</label>
                <input type="date" name="gdata" placeholder="yyyy-mm-dd"><br>
-             <label for="alga">Alga:</label><input type="number" name="alga" min="1"><br>
+             <label for="alga">Alga:</label><input type="number" name="alga" min="1" step="any" ><br>
              <input type="image" src="img/add-user.png" alt="Add" width="40" height="42">
             </form>
           </div>
@@ -39,19 +39,33 @@
            <tr>
              <th></th>
              <th>&nbsp ID &nbsp</th>
-             <th>&nbsp&nbsp Vardas &nbsp&nbsp</th>
-             <th>&nbsp&nbsp Pavarde &nbsp&nbsp</th>
-             <th>&nbsp&nbsp Gimimo data &nbsp&nbsp</th>
-             <th>&nbsp&nbsp Alga [Eu] &nbsp&nbsp</th>
-             <th>&nbsp&nbsp Kontaktai &nbsp&nbsp</th>
+             <th>&nbsp <a href="index.jsp?sortBy=vardas&order=asc"><img srcset="img/sortasc.png" alt="SortAsc" width="15" height="15"></a>
+             Vardas <a href="index.jsp?sortBy=vardas&order=desc"><img srcset="img/sortdesc.png" alt="SortDesc" width="15" height="15"></a> &nbsp</th>
+             <th>&nbsp <a href="index.jsp?sortBy=pavarde&order=asc"><img srcset="img/sortasc.png" alt="SortAsc" width="15" height="15"></a>
+             Pavarde <a href="index.jsp?sortBy=pavarde&order=desc"><img srcset="img/sortdesc.png" alt="SortDesc" width="15" height="15"></a> &nbsp</th>
+             <th>&nbsp Gimimo data &nbsp</th>
+             <th>&nbsp Alga [Eu] &nbsp</th>
+             <th>&nbsp Kontaktai &nbsp</th>
            </tr>
          </thead>
            <tr>
              <% int marked = 0;
+                String sortBy = null;
+                String order = null;
                 if (request.getParameter("marked") != null){
                    marked = Integer.parseInt(request.getParameter("marked"));
                 }
-                for (Zmogus zmogus: Db.getList()) {
+                if (request.getParameter("sortBy") != null){
+                   sortBy = request.getParameter("sortBy").trim();
+                }
+                if (request.getParameter("order") != null){
+                   order = request.getParameter("order").trim();
+                }
+                List<Zmogus> zmones =  Db.getList();
+                if (sortBy != null && order != null) {
+                zmones = Db.getListSorted(sortBy,order);
+                }
+                for (Zmogus zmogus: zmones) {
                   if (marked == zmogus.getId()){ %>
                      <tr class="marked">
                 <%  } else { %>

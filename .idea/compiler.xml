@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="zmones_web" options="-endorseddirs $PROJECT_DIR$/target/endorsed" />
+      <module name="zmones_web" options="-endorseddirs /home/vg/IdeaProjects/Alex/zmogusWeb/zmones_web/target/endorsed" />
     </option>
   </component>
 </project>
