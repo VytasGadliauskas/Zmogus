@@ -27,11 +27,12 @@ public class ZmogusFind extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if(!"".equals(request.getParameter("vardas")) && !"".equals(request.getParameter("pavarde"))){
-            String vardas = request.getParameter("vardas");
-            String pavarde = request.getParameter("pavarde");
+            String vardas = request.getParameter("vardas").trim();
+            String pavarde = request.getParameter("pavarde").trim();
+            System.out.println(vardas+" "+pavarde);
             int id = 0;
-            for (int i = 1; i < Db.getList().size(); i++) {
-                 if(vardas.trim().equals(Db.getList().get(i).getVardas()) && pavarde.trim().equals(Db.getList().get(i).getPavarde())){
+            for (int i = 0; i < Db.getList().size(); i++) {
+                 if(vardas.equals(Db.getList().get(i).getVardas()) && pavarde.equals(Db.getList().get(i).getPavarde())){
                      id = Db.getList().get(i).getId();
                  }
             }

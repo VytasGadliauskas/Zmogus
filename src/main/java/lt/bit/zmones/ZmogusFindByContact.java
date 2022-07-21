@@ -26,7 +26,7 @@ public class ZmogusFindByContact extends HttpServlet {
             String tipas = request.getParameter("tipas").trim();
             String reiksme = request.getParameter("reiksme").trim();
             int id = 0;
-            for (int i = 1; i < Db.getList().size(); i++) {
+            for (int i = 0; i < Db.getList().size(); i++) {
                 for (Kontaktas kontaktas: Db.getList().get(i).getKontaktai()) {
                     if(tipas.equals(kontaktas.getTipas()) && reiksme.equals(kontaktas.getReiksme())){
                         id = Db.getList().get(i).getId();
