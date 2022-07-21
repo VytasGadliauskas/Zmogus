@@ -47,7 +47,7 @@
         <% } catch (NumberFormatException nfe) {
            }
         }%>
-        <a href="kontaktas.jsp?id=<%=id%>"><img src="img/cancel.png" alt="Cancel" width="45" height="45"></a>
+        <a href="kontaktai.jsp?id=<%=id%>"><img src="img/cancel.png" alt="Cancel" width="45" height="45"></a>
         </div>
 
     </body>

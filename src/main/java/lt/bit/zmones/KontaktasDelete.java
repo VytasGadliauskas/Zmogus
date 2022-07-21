@@ -39,7 +39,7 @@ public class KontaktasDelete extends HttpServlet {
                 }
             }
         } catch (Exception ex) {
-            // ignore
+            response.sendRedirect("index.jsp");
         } finally {
             response.sendRedirect("kontaktai.jsp?id="+zids);
         }
