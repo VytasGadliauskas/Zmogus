@@ -21,6 +21,12 @@
              id = Integer.parseInt(request.getParameter("zid"));
              int kid = Integer.parseInt(request.getParameter("kid"));
              Zmogus zmogus = Db.getById(id);
+
+             if (zmogus == null) {
+                 response.sendRedirect("index.jsp");
+                 return;
+             }
+
              %>
                <div class="menu">
                    <div class="edit">

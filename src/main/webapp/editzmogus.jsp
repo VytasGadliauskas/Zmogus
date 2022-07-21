@@ -18,6 +18,8 @@
        try {
              int id = Integer.parseInt(request.getParameter("id"));
              Zmogus zmogus = Db.getById(id);
+
+             if (zmogus != null) {
              %>
                <div class="menu">
                    <div class="edit">
@@ -45,11 +47,14 @@
                      </form>
                    </div>
                 </div>
-        <% } catch (NumberFormatException nfe) {
-           }
-        }%>
+               <% } else { %>
+                       <h2> Zmogus nerastas </h2>
+                 <% }%>
+        <% } catch (NumberFormatException nfe) { %>
+             <h2> Zmogus nerastas </h2>
+        <%   }
+        } %>
         <a href="index.jsp"><img src="img/cancel.png" alt="Refresh" width="45" height="45"></a>
         </div>
-
     </body>
 </html>

@@ -15,22 +15,24 @@
     <body>
 
        <div class="menu">
-          <div class="add">
-            <form action="addZmogus" method="POST">
-             <label for="vardas">Vardas:</label><input type="text" name="vardas"><br>
-             <label for="pavarde">Pavarde:</label><input type="text" name="pavarde"><br>
-             <label for="gdata">Gimimo data:</label>
-               <input type="date" name="gdata" placeholder="yyyy-mm-dd"><br>
-             <label for="alga">Alga:</label><input type="number" name="alga" min="0" step="any" ><br>
-             <input type="image" src="img/add-user.png" alt="Add" width="40" height="42">
-            </form>
-          </div>
           <div class="find">
             <form action="findZmogus" method="POST">
+               <h3>Surasti zmogu</h3>
                Vardas:  <input name="vardas" required><br>
                Pavarde: <input name="pavarde" required><br>
                <input type="image" src="img/find-user.png" alt="Find" width="40" height="42">
             </form>
+         </div>
+         <div class="find">
+            <form action="findZmogusByContact" method="POST">
+               <h3>Surasti zmogu pagal kontakta</h3>
+               Tipas:  <input name="tipas" required><br>
+               Reiksme: <input name="reiksme" required><br>
+               <input type="image" src="img/find-user.png" alt="Find" width="40" height="42">
+            </form>
+         </div>
+         <div class="menusmall">
+               <a href="addzmogus.jsp"><img srcset="img/add-user.png" alt="Add User" width="40" height="42"></a>
          </div>
        </div>
        <div>
