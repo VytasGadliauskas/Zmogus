@@ -41,7 +41,6 @@ public class Db {
         }
         list.add(new Zmogus("Romas", "Romaitis", null, new BigDecimal(1000),
                 new ArrayList<Kontaktas>(Arrays.asList(kontaktas2, kontaktas5, kontaktas8))));
-
     }
     
     public static List<Zmogus> getList() {
@@ -49,7 +48,11 @@ public class Db {
     }
 
     public static List<Zmogus> getListSorted(String sortBy, String order) {
-        List<Zmogus> listSorted = getList();
+        List<Zmogus> listSorted =  new ArrayList<>();
+        for (Zmogus zmogus: getList()) {
+            listSorted.add(zmogus);
+        }
+
         if ("asc".equals(order)){
             if (getComparatorAsc(sortBy) != null) {
                 Collections.sort(listSorted, getComparatorAsc(sortBy));
@@ -100,7 +103,6 @@ public class Db {
                 };
                 break;
         }
-
         return  comparator;
     }
 
@@ -140,7 +142,6 @@ public class Db {
                 };
                 break;
         }
-
         return  comparator;
     }
 

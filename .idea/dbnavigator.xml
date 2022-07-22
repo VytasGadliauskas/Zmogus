@@ -38,11 +38,17 @@
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="08b065ae-d5d4-4291-9610-26716e9e4996" />
   </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="08b065ae-d5d4-4291-9610-26716e9e4996" dataset="dev.zmogus" active-filter-id="" />
+  </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.FileConnectionMappingManager">
+    <mapping file-url="file://$PROJECT_DIR$/src/main/java/lt/bit/zmones" connection-id="08b065ae-d5d4-4291-9610-26716e9e4996" session-id="MAIN" current-schema="dev" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />
