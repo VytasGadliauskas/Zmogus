@@ -1,0 +1,19 @@
+Prideti prie zmogaus
+ Adresas su savybem:
+ id
+ adresas
+ miestas
+ pastoKodas
+ valstybe
+
+ zmogus gali tureti daug adresu
+-------------------------------------------------
+1. zmoniu sarasas -> turi atspausdinti visa zmoniu sarasa
+2. ivesti nauja zmogu -> turi paklausti vardo, pavarde, gimimo datos (jei neivesta - i DB eina NULL), algos (jei neivesta - i DB eina NULL) ir irasyti i DB
+3. istrinti zmogu -> paklausti id ir istrinti zmogu su nurodytu id
+4. kontaktu sarasas -> paklausti id ir parodyti zmogaus kontaktu sarasa
+5. nauas kontaktas -> paklausti (zmogaus) id, tipo, reiksmes ir prideti nauja kontakta
+6. istrinti kontakta -> paklausti (kontakto) id ir istrinti nurodyta kontakta
+0. baigti darba
+
+

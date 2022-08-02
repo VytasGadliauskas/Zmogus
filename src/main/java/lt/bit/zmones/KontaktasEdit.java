@@ -15,48 +15,48 @@ public class KontaktasEdit extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String zids = request.getParameter("zid");
-        String kids = request.getParameter("kid");
-        String tipas = request.getParameter("tipas").trim();
-        String reiksme = request.getParameter("reiksme").trim();
-        try {
-            int zid = Integer.parseInt(zids);
-            int kid = Integer.parseInt(kids);
-            Zmogus z = Db.getById(zid);
-            if (z != null) {
-                if (!"".equals(tipas) && !"".equals(reiksme)) {
-                    List<Kontaktas> kontaktai = Db.getListKontaktaibyZmogusId(zid);
-                    for (int i = 0; i < kontaktai.size(); i++) {
-                        if (kid == kontaktai.get(i).getId()) {
-                            kontaktai.get(i).setTipas(tipas);
-                            kontaktai.get(i).setReiksme(reiksme);
-                            break;
-                        }
+        SaugumoPatikrinimas saugumoPatikrinimas = new SaugumoPatikrinimas("kontaktasedit", request);
+        if (saugumoPatikrinimas.Atsakymas()) {
+            String zmogaus_ids = request.getParameter("id");
+            String kids = request.getParameter("kid");
+            String tipas = request.getParameter("tipas").trim();
+            String reiksme = request.getParameter("reiksme").trim();
+            try {
+                int kid = Integer.parseInt(kids);
+                Kontaktas k = KontaktasRepo.getById(kid);
+                if (k != null) {
+                    if (!"".equals(tipas) && !"".equals(reiksme)) {
+                        k.setTipas(tipas);
+                        k.setReiksme(reiksme);
+                        KontaktasRepo.updateKontaktas(k);
                     }
                 }
+            } catch (Exception ex) {
+                // ignore
+            } finally {
+                response.sendRedirect("kontaktai.jsp?id=" + zmogaus_ids);
             }
-        } catch (Exception ex) {
-            // ignore
-        } finally {
-            response.sendRedirect("kontaktai.jsp?id="+zids);
+        } else {
+            response.sendRedirect("klaida.jsp");
         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -67,10 +67,10 @@ public class KontaktasEdit extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

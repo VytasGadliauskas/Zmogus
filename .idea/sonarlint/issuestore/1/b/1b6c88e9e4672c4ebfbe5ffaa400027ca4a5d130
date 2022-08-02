@@ -1,0 +1,71 @@
+
+q
+java:S1192u"TDefine a constant instead of duplicating this literal "Ptikrinimo klaida 1" 3 times.(¦Ã¢Õ8Àİ¿’£0
+v
+java:S1192y"TDefine a constant instead of duplicating this literal "Ptikrinimo klaida 2" 3 times.(¾»ñ“ûÿÿÿÿ8Àİ¿’£0
+\
+java:S1192/"FDefine a constant instead of duplicating this literal "gdata" 4 times.(¡×—Ì
+j
+java:S1192o"HDefine a constant instead of duplicating this literal "reiksme" 4 times.(À©¾òüÿÿÿÿ8Àİ¿’£0
+d
+java:S1192¡"HDefine a constant instead of duplicating this literal "adresas" 4 times.(Î¾ÀÈúÿÿÿÿ
+h
+java:S1192n"FDefine a constant instead of duplicating this literal "tipas" 4 times.(ÁëòÒùÿÿÿÿ8Áİ¿’£0
+d
+java:S1192 "HDefine a constant instead of duplicating this literal "miestas" 4 times.(‘ë¤âøÿÿÿÿ
+`
+java:S1192Ÿ"IDefine a constant instead of duplicating this literal "valstybe" 4 times.(Œƒ¨š
+]
+java:S1192+"GDefine a constant instead of duplicating this literal "vardas" 4 times.(õ–ì¾
+j
+java:S1192#"TDefine a constant instead of duplicating this literal "Ptikrinimo klaida " 10 times.(ÑÛÂ
+^
+java:S1192,"HDefine a constant instead of duplicating this literal "pavarde" 4 times.(° Œ¾
+g
+java:S1192¢"KDefine a constant instead of duplicating this literal "pastokodas" 4 times.( ¯š…úÿÿÿÿ
+J
+java:S10660"/Merge this if statement with the enclosing one.(«¦¢úÿÿÿÿ
+J
+java:S10666"/Merge this if statement with the enclosing one.(¿Î¹”şÿÿÿÿ
+J
+java:S1066L"/Merge this if statement with the enclosing one.(«¦¢úÿÿÿÿ
+J
+java:S1066R"/Merge this if statement with the enclosing one.(¿Î¹”şÿÿÿÿ
+c	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘ü’§
+i
+java:S3776"SRefactor this method to reduce its Cognitive Complexity from 123 to the 15 allowed.(‘ü’§
+N	java:S106#"9Replace this use of System.out or System.err by a logger.(ÑÛÂ
+N	java:S106'"9Replace this use of System.out or System.err by a logger.(ÑÛÂ
+S	java:S1061"9Replace this use of System.out or System.err by a logger.(íæØìıÿÿÿÿ
+S	java:S1067"9Replace this use of System.out or System.err by a logger.(Àéè¸şÿÿÿÿ
+S	java:S106="9Replace this use of System.out or System.err by a logger.(À˜ï™şÿÿÿÿ
+S	java:S106A"9Replace this use of System.out or System.err by a logger.(ö˜×¹ıÿÿÿÿ
+S	java:S106M"9Replace this use of System.out or System.err by a logger.(íæØìıÿÿÿÿ
+S	java:S106S"9Replace this use of System.out or System.err by a logger.(Àéè¸şÿÿÿÿ
+S	java:S106Y"9Replace this use of System.out or System.err by a logger.(À˜ï™şÿÿÿÿ
+S	java:S106]"9Replace this use of System.out or System.err by a logger.(ö˜×¹ıÿÿÿÿ
+N	java:S106e"9Replace this use of System.out or System.err by a logger.(ÑÛÂ
+N	java:S106i"9Replace this use of System.out or System.err by a logger.(ÑÛÂ
+N	java:S106u"9Replace this use of System.out or System.err by a logger.(¦Ã¢Õ
+S	java:S106y"9Replace this use of System.out or System.err by a logger.(¾»ñ“ûÿÿÿÿ
+O	java:S106‡"9Replace this use of System.out or System.err by a logger.(¦Ã¢Õ
+T	java:S106‹"9Replace this use of System.out or System.err by a logger.(¾»ñ“ûÿÿÿÿ
+O	java:S106–"9Replace this use of System.out or System.err by a logger.(¦Ã¢Õ
+T	java:S106š"9Replace this use of System.out or System.err by a logger.(¾»ñ“ûÿÿÿÿ
+O	java:S106ª"9Replace this use of System.out or System.err by a logger.(ÑÛÂ
+O	java:S106®"9Replace this use of System.out or System.err by a logger.(ÑÛÂ
+O	java:S106À"9Replace this use of System.out or System.err by a logger.(ÑÛÂ
+O	java:S106Ä"9Replace this use of System.out or System.err by a logger.(ÑÛÂ
+O	java:S106Î"9Replace this use of System.out or System.err by a logger.(ÑÛÂ
+V	java:S106Ò"9Replace this use of System.out or System.err by a logger.(ÑÛÂ8—ê¾’£0
+V	java:S106Ö"9Replace this use of System.out or System.err by a logger.(ÄÒ•8˜ê¾’£0
+[	java:S106Ø"9Replace this use of System.out or System.err by a logger.(î£‰şÿÿÿÿ8›ê¾’£0
+[	java:S106â"9Replace this use of System.out or System.err by a logger.(¤Ä„Æÿÿÿÿÿ8ê¾’£0
+]
+java:S1126ç"AReplace this if-then-else statement by a single return statement.(”ë¯ıÿÿÿÿ
+X
+java:S1126ú"AReplace this if-then-else statement by a single return statement.(Íí×à
+X
+java:S1126Œ"AReplace this if-then-else statement by a single return statement.(Íí×à
+V	java:S106"9Replace this use of System.out or System.err by a logger.(ÇÒîö8ôİ¿’£0
+[	java:S106­"9Replace this use of System.out or System.err by a logger.(¤Ä„Æÿÿÿÿÿ8õİ¿’£0

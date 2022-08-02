@@ -1,7 +1,8 @@
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="lt.bit.zmones.Zmogus"%>
-<%@page import="lt.bit.zmones.Db"%>
+<%@page import="lt.bit.zmones.ZmogusRepo"%>
+<%@page import="lt.bit.zmones.SaugumoPatikrinimas"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,18 +14,16 @@
         <title>Zmogus edit</title>
     </head>
     <body>
-    <%
-      if (request.getParameter("id") != null){
-       try {
-             int id = Integer.parseInt(request.getParameter("id"));
-             Zmogus zmogus = Db.getById(id);
-
-             if (zmogus != null) {
+    <%     int id = 0;
+           SaugumoPatikrinimas saugumop = new SaugumoPatikrinimas("idpatikrinimas", request);
+           if (saugumop.Atsakymas()){
+              id = Integer.parseInt(request.getParameter("id"));
+              Zmogus zmogus = ZmogusRepo.getById(id);
              %>
                <div class="menu">
                    <div class="edit">
                      <form action="editZmogus" method="POST">
-                      <label for="id">ID:</label><input class="marked" type="text" name="id" value="<%=zmogus.getId()%>" readonly="readonly"><br>
+                      <input type="hidden" name="id" value="<%=zmogus.getId()%>" readonly="readonly"><br>
                       <label for="vardas">Vardas:</label><input type="text" name="vardas" value="<%=zmogus.getVardas()%>"><br>
                       <label for="pavarde">Pavarde:</label><input type="text" name="pavarde" value="<%=zmogus.getPavarde()%>"><br>
                       <label for="gdata">Gimimo data:</label>
@@ -48,13 +47,9 @@
                    </div>
                 </div>
                <% } else { %>
-                       <h2> Zmogus nerastas </h2>
-                 <% }%>
-        <% } catch (NumberFormatException nfe) { %>
-             <h2> Zmogus nerastas </h2>
-        <%   }
-        } %>
-        <a href="index.jsp"><img src="img/cancel.png" alt="Refresh" width="45" height="45"></a>
+                       <h2 class="menu"> Zmogus nerastas </h2>
+               <% } %>
+        <a class="menu" href="index.jsp"><img src="img/cancel.png" alt="Refresh" width="45" height="45"></a>
         </div>
     </body>
 </html>

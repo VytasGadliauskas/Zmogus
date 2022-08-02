@@ -1,0 +1,51 @@
+
+`	java:S112,"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S1121"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+o
+java:S2293&"YReplace the type specification in this constructor call with the diamond operator ("<>").(ùÂ®•
+t
+java:S2293("YReplace the type specification in this constructor call with the diamond operator ("<>").(ÓÝ÷Üüÿÿÿÿ
+t
+java:S22934"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ààñ«ùÿÿÿÿ
+t
+java:S22936"YReplace the type specification in this constructor call with the diamond operator ("<>").(§“’Úüÿÿÿÿ
+o
+java:S22937"YReplace the type specification in this constructor call with the diamond operator ("<>").(¿“‡—
+t
+java:S22939"YReplace the type specification in this constructor call with the diamond operator ("<>").(§“’Úüÿÿÿÿ
+n
+java:S2293:"YReplace the type specification in this constructor call with the diamond operator ("<>").(‰ÑãJ
+u
+java:S2293È"YReplace the type specification in this constructor call with the diamond operator ("<>").(ãªþÁøÿÿÿÿ
+p
+java:S2293Ø"YReplace the type specification in this constructor call with the diamond operator ("<>").(çš÷ø
+^
+java:S1192"HDefine a constant instead of duplicating this literal "emailas" 3 times.(°ìë‡
+^
+java:S1192"HDefine a constant instead of duplicating this literal "Lietuva" 4 times.(Æ»‹¡
+_
+java:S11923"IDefine a constant instead of duplicating this literal "Romaitis" 3 times.(µƒ¸™
+^
+java:S1192"HDefine a constant instead of duplicating this literal "adresas" 3 times.(ó—×’
+e
+java:S1192"JDefine a constant instead of duplicating this literal "telefonas" 3 times.(þÊ–°ûÿÿÿÿ
+[
+java:S2259Ç"DA "NullPointerException" could be thrown; "zmogus" is nullable here.(ÍÒË³
+`
+java:S2259µ"DA "NullPointerException" could be thrown; "zmogus" is nullable here.(ýŒªÒÿÿÿÿÿ
+Z
+java:S2259×"DA "NullPointerException" could be thrown; "zmogus" is nullable here.(õÙþ
+U
+java:S1118":Add a private constructor to hide the implicit public one.(û¬³Ÿüÿÿÿÿ
+J
+java:S1481"/Remove this unused "kontaktas3" local variable.(´Ø®þûÿÿÿÿ
+E
+java:S1481"/Remove this unused "kontaktas6" local variable.(ŒÖÙÊ
+E
+java:S1481"/Remove this unused "kontaktas9" local variable.(«æ‰ï
+H
+java:S1481"-Remove this unused "adresas4" local variable.(±ˆÏµûÿÿÿÿ
+<	java:S131\""Add a default case to this switch.(îÞ¨Èþÿÿÿÿ
+=	java:S131ƒ""Add a default case to this switch.(îÞ¨Èþÿÿÿÿ
+Q	java:S125Î"<This block of commented-out lines of code should be removed.(×¸Ü/
+R	java:S125Ò"<This block of commented-out lines of code should be removed.(ÂÈ„»

@@ -1,19 +1,34 @@
 package lt.bit.zmones;
 
 public class Kontaktas {
-    private static int nextId = 1;
     private int id;
+    private int zmogaus_id;
     private String tipas;
     private String reiksme;
 
-    public Kontaktas(String tipas, String reiksme) {
-        this.id = nextId++;
+    public Kontaktas(int zmogaus_id, String tipas, String reiksme) {
+        this.zmogaus_id = zmogaus_id;
+        this.tipas = tipas;
+        this.reiksme = reiksme;
+    }
+
+    public Kontaktas(int id, int zmogaus_id, String tipas, String reiksme) {
+        this.id = id;
+        this.zmogaus_id = zmogaus_id;
         this.tipas = tipas;
         this.reiksme = reiksme;
     }
 
     public int getId() {
         return id;
+    }
+
+    public int getZmogaus_id() {
+        return zmogaus_id;
+    }
+
+    public void setZmogaus_id(int zmogaus_id) {
+        this.zmogaus_id = zmogaus_id;
     }
 
     public String getTipas() {

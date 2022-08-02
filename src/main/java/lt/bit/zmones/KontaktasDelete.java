@@ -22,26 +22,24 @@ public class KontaktasDelete extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String zids = request.getParameter("zid");
-        String kids = request.getParameter("kid");
-
-        try {
-            int zid = Integer.parseInt(zids);
-            int kid = Integer.parseInt(kids);
-            Zmogus z = Db.getById(zid);
-            if (z != null) {
-                List<Kontaktas> kontaktai = Db.getListKontaktaibyZmogusId(zid);
-                for (int i = 0; i < kontaktai.size(); i++) {
-                    if(kid == kontaktai.get(i).getId()){
-                        kontaktai.remove(kontaktai.get(i));
-                        break;
-                    }
+        SaugumoPatikrinimas saugumoPatikrinimas = new SaugumoPatikrinimas("kontaktasdelete", request);
+        if (saugumoPatikrinimas.Atsakymas()) {
+            String ids = request.getParameter("id");
+            String kids = request.getParameter("kid");
+            try {
+                int id = Integer.parseInt(ids);
+                int kid = Integer.parseInt(kids);
+                Kontaktas k = KontaktasRepo.getById(kid);
+                if (k != null) {
+                    KontaktasRepo.deleteKontaktas(k);
                 }
+            } catch (Exception ex) {
+                response.sendRedirect("klaida.jsp");
+            } finally {
+                response.sendRedirect("kontaktai.jsp?id=" + ids);
             }
-        } catch (Exception ex) {
-            response.sendRedirect("index.jsp");
-        } finally {
-            response.sendRedirect("kontaktai.jsp?id="+zids);
+        } else {
+            response.sendRedirect("klaida.jsp");
         }
     }
 

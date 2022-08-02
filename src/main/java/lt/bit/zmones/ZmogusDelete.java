@@ -21,17 +21,23 @@ public class ZmogusDelete extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ids = request.getParameter("id");
-        try {
-            int id = Integer.parseInt(ids);
-            Zmogus z = Db.getById(id);
-            if (z != null) {
-                Db.delete(z);
+
+        SaugumoPatikrinimas saugumoPatikrinimas = new SaugumoPatikrinimas("zmogusdelete", request);
+        if (saugumoPatikrinimas.Atsakymas()) {
+            String ids = request.getParameter("id");
+            try {
+                int id = Integer.parseInt(ids);
+                Zmogus z = ZmogusRepo.getById(id);
+                if (z != null) {
+                    ZmogusRepo.deleteZmogus(z);
+                }
+            } catch (Exception ex) {
+                response.sendRedirect("klaida.jsp");
+            } finally {
+                response.sendRedirect("index.jsp");
             }
-        } catch (Exception ex) {
-            // ignore
-        } finally {
-            response.sendRedirect("index.jsp");
+        } else {
+            response.sendRedirect("klaida.jsp");
         }
     }
 

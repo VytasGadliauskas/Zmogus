@@ -1,7 +1,9 @@
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="lt.bit.zmones.Zmogus"%>
-<%@page import="lt.bit.zmones.Db"%>
+<%@page import="lt.bit.zmones.ZmogusRepo"%>
+<%@page import="lt.bit.zmones.KontaktasRepo"%>
+<%@page import="lt.bit.zmones.AdresasRepo"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,9 +15,16 @@
         <title>Zmoniu sarasas</title>
     </head>
     <body>
+    <div id="mySidenav" class="sidenav" >
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+          <img src="img/cancel.png" alt="Cancel" width="30" height="32">
+          </a>
 
-       <div class="menu">
-          <div class="find">
+          <div class="menusmall">
+               <a href="addzmogus.jsp"><img srcset="img/add-user.png" alt="Add User" width="40" height="42"></a>
+          </div>
+
+         <div class="find">
             <form action="findZmogus" method="POST">
                <h3>Surasti zmogu</h3>
                Vardas:  <input name="vardas" required><br>
@@ -31,11 +40,22 @@
                <input type="image" src="img/find-user.png" alt="Find" width="40" height="42">
             </form>
          </div>
-         <div class="menusmall">
-               <a href="addzmogus.jsp"><img srcset="img/add-user.png" alt="Add User" width="40" height="42"></a>
+         <div class="findadresas">
+            <form action="findZmogusByAdresas" method="POST">
+               <h3>Surasti zmogu pagal adresa</h3>
+               Valstybe: <input name="valstybe" required><br>
+               Miestas: <input name="miestas" required><br>
+               Adresas: <input name="adresas" required><br>
+               Pasto k: <input name="pastokodas" required><br>
+               <input type="image" src="img/find-user.png" alt="Find" width="40" height="42">
+            </form>
          </div>
+    </div>
+       <div class="menutop">
+          <div><input type="image" onclick="openNav()" src="img/menu.png" alt="Open menu" width="40" height="42"><div>
+          <div>Open Menu</div>
        </div>
-       <div>
+       <div class="menu">
         <table class="lentele">
          <thead>
            <tr>
@@ -48,14 +68,43 @@
              <th>&nbsp Gimimo data &nbsp</th>
              <th>&nbsp Alga [Eu] &nbsp</th>
              <th>&nbsp Kontaktai &nbsp</th>
+             <th>&nbsp Adresai &nbsp</th>
            </tr>
          </thead>
            <tr>
-             <% int marked = 0;
+             <% String filterVardas = null;
+                String filterPavarde = null;
+                String filterTipas = null;
+                String filterReiksme = null;
+                String filterValstybe = null;
+                String filterMiestas = null;
+                String filterAdresas = null;
+                String filterPastokodas = null;
                 String sortBy = null;
                 String order = null;
-                if (request.getParameter("marked") != null){
-                   marked = Integer.parseInt(request.getParameter("marked"));
+                if (request.getParameter("filterVardas") != null){
+                   filterVardas = request.getParameter("filterVardas");
+                }
+                if (request.getParameter("filterPavarde") != null){
+                   filterPavarde = request.getParameter("filterPavarde");
+                }
+                if (request.getParameter("filterTipas") != null){
+                   filterTipas = request.getParameter("filterTipas");
+                }
+                if (request.getParameter("filterReiksme") != null){
+                   filterReiksme = request.getParameter("filterReiksme");
+                }
+                if (request.getParameter("filterValstybe") != null){
+                   filterValstybe = request.getParameter("filterValstybe");
+                }
+                if (request.getParameter("filterMiestas") != null){
+                   filterMiestas = request.getParameter("filterMiestas");
+                }
+                if (request.getParameter("filterAdresas") != null){
+                   filterAdresas = request.getParameter("filterAdresas");
+                }
+                if (request.getParameter("filterPastokodas") != null){
+                   filterPastokodas = request.getParameter("filterPastokodas");
                 }
                 if (request.getParameter("sortBy") != null){
                    sortBy = request.getParameter("sortBy").trim();
@@ -63,16 +112,23 @@
                 if (request.getParameter("order") != null){
                    order = request.getParameter("order").trim();
                 }
-                List<Zmogus> zmones =  Db.getList();
+                List<Zmogus> zmones =  ZmogusRepo.getZmones();
                 if (sortBy != null && order != null) {
-                zmones = Db.getListSorted(sortBy,order);
+                   zmones = ZmogusRepo.getListSorted(sortBy,order);
                 }
+                if (filterVardas !=null && filterPavarde != null) {
+                    zmones = ZmogusRepo.filteredZmones(filterVardas,filterPavarde);
+                }
+                if (filterTipas !=null && filterReiksme != null) {
+                    zmones = KontaktasRepo.getZmonesByKontaktas(filterTipas,filterReiksme);
+                }
+                if (filterValstybe !=null && filterMiestas != null && filterAdresas !=null && filterPastokodas != null) {
+                    zmones = AdresasRepo.getZmonesByAdresas(filterValstybe,filterMiestas,filterAdresas,filterPastokodas);
+                }
+
                 for (Zmogus zmogus: zmones) {
-                  if (marked == zmogus.getId()){ %>
-                     <tr class="marked">
-                <%  } else { %>
+                  %>
                     <tr>
-                <% }  %>
                      <td><a href="deleteZmogus?id=<%= zmogus.getId() %>">
                               <img src="img/delete-user.png" alt="Delete" width="40" height="42"></a>&nbsp
                          <a href="editzmogus.jsp?id=<%= zmogus.getId() %>">
@@ -95,21 +151,42 @@
                              alga = "0";
                          } %>
                      <td><%= alga  %></td>
-                     <% if (zmogus.getKontaktai().size() > 0) { %>
-                        <td><a href="kontaktai.jsp?id=<%=zmogus.getId()%>">
-                              <img src="img/contact.png" alt="Kontaktai" width="40" height="42"></a></td>
-                        <% } else { %>
-                        <td><a href="kontaktai.jsp?id=<%=zmogus.getId()%>">
-                             <img src="img/add.png" alt="Kontaktai" width="40" height="42"></a></td>
-                       <%  } %>
+                     <% int kontaktaiSk = 0;
+                        if (KontaktasRepo.getKontaktai(zmogus.getId()) != null) { kontaktaiSk = KontaktasRepo.getKontaktai(zmogus.getId()).size();}
+                          if ( kontaktaiSk > 0 ) { %>
+                               <td><a href="kontaktai.jsp?id=<%=zmogus.getId()%>">
+                                  <img src="img/contact.png" alt="Kontaktai" width="40" height="42"></a></td>
+                          <% } else { %>
+                               <td><a href="kontaktai.jsp?id=<%=zmogus.getId()%>">
+                                  <img src="img/add.png" alt="Kontaktai" width="40" height="42"></a></td>
+                          <% } %>
+                     <% int adresaiSk = 0;
+                        if (AdresasRepo.getAdresai(zmogus.getId()) != null) { adresaiSk = AdresasRepo.getAdresai(zmogus.getId()).size();}
+                           if ( adresaiSk > 0 ) { %>
+                               <td><a href="adresai.jsp?id=<%=zmogus.getId()%>">
+                                  <img src="img/address.png" alt="Adresai" width="40" height="42"></a></td>
+                           <% } else { %>
+                               <td><a href="adresai.jsp?id=<%=zmogus.getId()%>">
+                                  <img src="img/add.png" alt="Adresai" width="40" height="42"></a></td>
+                        <% } %>
                  </tr>
              <% } %>
            </tr>
         </table>
-            <div class="menu">
-                 <a href="index.jsp"><img src="img/refresh.png" alt="Refresh" width="45" height="45"></a>
-
-            </div>
         </div>
+        <div class="menu">
+             <a href="index.jsp"><img src="img/refresh.png" alt="Refresh" width="45" height="45"></a>
+        </div>
+
+        <script>
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "400px";
+        }
+
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+        }
+        </script>
+
     </body>
 </html>

@@ -7,8 +7,6 @@ import java.util.List;
 
 public class Zmogus {
 
-    private static int nextId = 1;
-
     private int id;
     private String vardas;
     private String pavarde;
@@ -16,28 +14,25 @@ public class Zmogus {
     private BigDecimal alga;
 
     private List<Kontaktas> kontaktai = new ArrayList<>();
+    private List<Adresas> adresai = new ArrayList<>();
+
+    public Zmogus(int id ,String vardas, String pavarde) {
+        this.id = id;
+        this.vardas = vardas;
+        this.pavarde = pavarde;
+    }
+
+    public Zmogus(int id ,String vardas, String pavarde, Date gimimoData, BigDecimal alga) {
+        this.id = id;
+        this.vardas = vardas;
+        this.pavarde = pavarde;
+        this.gimimoData = gimimoData;
+        this.alga = alga;
+    }
 
     public Zmogus(String vardas, String pavarde) {
-        this.id = nextId++;
         this.vardas = vardas;
         this.pavarde = pavarde;
-    }
-
-    public Zmogus(String vardas, String pavarde, Date gimimoData, BigDecimal alga) {
-        this.id = nextId++;
-        this.vardas = vardas;
-        this.pavarde = pavarde;
-        this.gimimoData = gimimoData;
-        this.alga = alga;
-    }
-
-    public Zmogus(String vardas, String pavarde, Date gimimoData, BigDecimal alga, List<Kontaktas> kontaktai) {
-        this.id = nextId++;
-        this.vardas = vardas;
-        this.pavarde = pavarde;
-        this.gimimoData = gimimoData;
-        this.alga = alga;
-        this.kontaktai = kontaktai;
     }
 
     public int getId() {
@@ -84,8 +79,17 @@ public class Zmogus {
         return kontaktai;
     }
 
+
     public void setKontaktai(List<Kontaktas> kontaktai) {
         this.kontaktai = kontaktai;
+    }
+
+    public List<Adresas> getAdresai() {
+        return adresai;
+    }
+
+    public void setAdresai(List<Adresas> adresai) {
+        this.adresai = adresai;
     }
 
     @Override
@@ -112,8 +116,14 @@ public class Zmogus {
 
     @Override
     public String toString() {
-        return "Zmogus{" + "id=" + id + ", vardas=" + vardas + ", pavarde=" + pavarde + ", gimimoData=" + gimimoData + ", alga=" + alga + '}';
+        return "Zmogus{" +
+                "id=" + id +
+                ", vardas='" + vardas + '\'' +
+                ", pavarde='" + pavarde + '\'' +
+                ", gimimoData=" + gimimoData +
+                ", alga=" + alga +
+                ", kontaktai=" + kontaktai +
+                ", adresai=" + adresai +
+                '}';
     }
-
-    
 }

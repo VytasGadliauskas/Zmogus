@@ -1,8 +1,11 @@
-<%@page import="java.util.List"%>
+<%@page import="java.util.*"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="lt.bit.zmones.Zmogus"%>
+<%@page import="lt.bit.zmones.ZmogusRepo"%>
+<%@page import="lt.bit.zmones.SaugumoPatikrinimas"%>
 <%@page import="lt.bit.zmones.Kontaktas"%>
-<%@page import="lt.bit.zmones.Db"%>
+<%@page import="lt.bit.zmones.KontaktasRepo"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,27 +14,22 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <script src="js/script.js"></script>
-        <title>Zmoniu sarasas</title>
+        <title>Zmogaus kontaktai</title>
     </head>
     <body>
     <%
        int id = 0;
-       if (request.getParameter("id") != null){
-           try {
-               id = Integer.parseInt(request.getParameter("id"));
-           } catch (NumberFormatException nfe) { %>
-                <h2> Zmogus nerastas </h2>
-         <%  }
-
-           Zmogus zmogus = Db.getById(id);
-
-       if (zmogus != null) {
-         %>
+       SaugumoPatikrinimas saugumop = new SaugumoPatikrinimas("idpatikrinimas", request);
+       if (saugumop.Atsakymas()){
+           id = Integer.parseInt(request.getParameter("id"));
+           Zmogus zmogus = ZmogusRepo.getById(id);
+           List<Kontaktas> kontaktai = KontaktasRepo.getKontaktai(id);
+           %>
 
        <div class="menu">
           <div class="addc">
-            <form action="addKontaktas" method="POST">
-             <label for="id">ID:</label><input class="marked" type="text" name="id" value="<%=zmogus.getId()%>" readonly="readonly"><br>
+            <form  action="addKontaktas" method="POST">
+             <input type="hidden" name="zmogaus_id" value="<%=zmogus.getId()%>" readonly="readonly"><br>
              <label for="tipas">Tipas:</label><input type="text" name="tipas"><br>
              <label for="reiksme">Reiksme:</label><input type="text" name="reiksme"><br>
              <input type="image" src="img/add.png" alt="Add" width="40" height="42">
@@ -71,34 +69,35 @@
               <td><%= alga  %></td>
            </tr>
         </table>
-        <h2>Zmogaus kontaktai</h2>
+        <h2 class="menu">Zmogaus kontaktai</h2>
         <table class="lentele">
            <thead>
              <tr>
                 <th></th>
-                <th>&nbsp ID &nbsp</th>
+                <th>&nbsp&nbsp Nr &nbsp&nbsp</th>
                 <th>&nbsp&nbsp Tipas &nbsp&nbsp</th>
                 <th>&nbsp&nbsp Reiksme &nbsp&nbsp</th>
              </tr>
            </thead>
-              <%
-                for (Kontaktas kontaktas: Db.getListKontaktaibyZmogusId(id)) { %>
-                  <tr><td><a href="deleteKontaktas?zid=<%=id%>&kid=<%=kontaktas.getId()%>">
+              <% int eilesNr = 0;
+                for (Kontaktas kontaktas: kontaktai) { %>
+                  <tr><td><a href="deleteKontaktas?id=<%=zmogus.getId()%>&&kid=<%=kontaktas.getId()%>">
                          <img src="img/remove.png" alt="Delete" width="40" height="42"></a>&nbsp
-                      <a href="editkontaktas.jsp?zid=<%=id%>&kid=<%=kontaktas.getId()%>">
+                      <a href="editkontaktas.jsp?id=<%=zmogus.getId()%>&&kid=<%=kontaktas.getId()%>">
                          <img src="img/edit.png" alt="Edit" width="40" height="42"></a></td>
-                  <td><%= kontaktas.getId() %></td>
+                  <td><%= ++eilesNr %></td>
                   <td><%= kontaktas.getTipas()  %></td>
                   <td><%= kontaktas.getReiksme()  %></td></tr>
                 <% } %>
            </table>
-        <% }
-        } else { %>
-        <h2> Zmogus nerastas </h2>
-        <% }%>
+        <% } else {
+            response.sendRedirect("klaida.jsp");
+        }%>
 
-        <a href="index.jsp"><img src="img/cancel.png" alt="Cancel" width="45" height="45"></a>
-        <a href="kontaktai.jsp?id=<%=id%>"><img src="img/refresh.png" alt="Refresh" width="45" height="45"></a>
+        <div class="menu">
+           <a href="index.jsp"><img src="img/cancel.png" alt="Cancel" width="45" height="45"></a>
+           <a href="kontaktai.jsp?id=<%=id%>"><img src="img/refresh.png" alt="Refresh" width="45" height="45"></a>
+        </div>
         </div>
     </body>
 </html>

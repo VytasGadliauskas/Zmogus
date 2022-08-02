@@ -2,7 +2,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="lt.bit.zmones.Zmogus"%>
 <%@page import="lt.bit.zmones.Kontaktas"%>
-<%@page import="lt.bit.zmones.Db"%>
+<%@page import="lt.bit.zmones.KontaktasRepo"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,27 +11,22 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <script src="js/script.js"></script>
-        <title>Zmoniu sarasas</title>
+        <title>Kontaktai</title>
     </head>
     <body>
     <%
-       int id = 0;
-       if (request.getParameter("id") != null){
-           try {
-               id = Integer.parseInt(request.getParameter("id"));
-           } catch (NumberFormatException nfe) { %>
-                <h2> Zmogus nerastas </h2>
-         <%  }
+        int id = 0;
+        SaugumoPatikrinimas saugumop = new SaugumoPatikrinimas("idpatikrinimas", request);
+          if (saugumop.Atsakymas()){
+              id = Integer.parseInt(request.getParameter("id"));
+              Zmogus zmogus = Db.getById(id);
+              List<Kontaktas> kontaktai = Db.getListKontaktaibyZmogusId(id);
+        %>
 
-           Zmogus zmogus = Db.getById(id);
-
-       if (zmogus != null) {
-         %>
-
-       <div class="menu">
+        <div class="menu">
           <div class="addc">
             <form action="addKontaktas" method="POST">
-             <label for="id">ID:</label><input class="marked" type="text" name="id" value="<%=zmogus.getId()%>" readonly="readonly"><br>
+             <input type="hidden" name="id" value="<%=zmogus.getId()%>" readonly="readonly"><br>
              <label for="tipas">Tipas:</label><input type="text" name="tipas"><br>
              <label for="reiksme">Reiksme:</label><input type="text" name="reiksme"><br>
              <input type="image" src="img/add.png" alt="Add" width="40" height="42">
@@ -82,7 +77,7 @@
              </tr>
            </thead>
               <%
-                for (Kontaktas kontaktas: Db.getListKontaktaibyZmogusId(id)) { %>
+                for (Kontaktas kontaktas: kontaktai) { %>
                   <tr><td><a href="deleteKontaktas?zid=<%=id%>&kid=<%=kontaktas.getId()%>">
                          <img src="img/remove.png" alt="Delete" width="40" height="42"></a>&nbsp
                       <a href="editkontaktas.jsp?zid=<%=id%>&kid=<%=kontaktas.getId()%>">

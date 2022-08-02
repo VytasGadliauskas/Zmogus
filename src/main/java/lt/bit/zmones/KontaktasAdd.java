@@ -22,24 +22,27 @@ public class KontaktasAdd extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String zids = request.getParameter("id");
-        String tipas = request.getParameter("tipas").trim();
-        String reiksme = request.getParameter("reiksme").trim();
-
-        try {
-            int zid = Integer.parseInt(zids);
-            Zmogus z = Db.getById(zid);
-            if (z != null) {
-                if (!"".equals(tipas) && !"".equals(reiksme)) {
-                    List<Kontaktas> kontaktai = Db.getListKontaktaibyZmogusId(zid);
-                    Kontaktas kontaktas = new Kontaktas(tipas, reiksme);
-                    kontaktai.add(kontaktas);
+        SaugumoPatikrinimas saugumoPatikrinimas = new SaugumoPatikrinimas("kontaktasadd", request);
+        if (saugumoPatikrinimas.Atsakymas()) {
+            String zmogaus_ids = request.getParameter("zmogaus_id");
+            String tipas = request.getParameter("tipas").trim();
+            String reiksme = request.getParameter("reiksme").trim();
+            try {
+                int zmogaus_id = Integer.parseInt(zmogaus_ids);
+                Zmogus z = ZmogusRepo.getById(zmogaus_id);
+                if (z != null) {
+                    if (!"".equals(tipas) && !"".equals(reiksme)) {
+                        Kontaktas kontaktas = new Kontaktas(zmogaus_id, tipas, reiksme);
+                        KontaktasRepo.addKontaktas(kontaktas);
+                    }
                 }
+            } catch (Exception ex) {
+                response.sendRedirect("klaida.jsp");
+            } finally {
+                response.sendRedirect("kontaktai.jsp?id=" + zmogaus_ids);
             }
-        } catch (Exception ex) {
-            // ignore
-        } finally {
-            response.sendRedirect("kontaktai.jsp?id="+zids);
+        } else {
+            response.sendRedirect("klaida.jsp");
         }
     }
 

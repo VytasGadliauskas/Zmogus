@@ -1,7 +1,9 @@
 
-Q
-java:S1066""/Merge this if statement with the enclosing one.(ΖΛϊÿÿÿÿ8 κκΆ0
-…
-java:S1989@"hHandle the following exceptions that could be thrown by "processRequest": ServletException, IOException.(‘Ρ8ΠκκΆ0
-…
-java:S1989N"hHandle the following exceptions that could be thrown by "processRequest": ServletException, IOException.(‘Ρ8ÒκκΆ0
+J
+java:S1066$"/Merge this if statement with the enclosing one.(ΖΛϊÿÿÿÿ
+m
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(ωκάεϋÿÿÿÿ
+~
+java:S1989F"hHandle the following exceptions that could be thrown by "processRequest": ServletException, IOException.(‘Ρ
+~
+java:S1989T"hHandle the following exceptions that could be thrown by "processRequest": ServletException, IOException.(‘Ρ
