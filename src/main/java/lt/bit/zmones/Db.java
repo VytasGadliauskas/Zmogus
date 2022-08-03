@@ -3,7 +3,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 
 public class Db {
     private static Connection con = null;
@@ -18,7 +17,7 @@ public class Db {
         if (dbinstance == null) {
             dbinstance = new Db();
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
+              //  Class.forName("com.mysql.cj.jdbc.Driver");
                 con = DriverManager.getConnection(
                         "jdbc:mysql://localhost:3306/Adresu_knyga", "user", "user123");
                 stmt = con.createStatement();

@@ -15,6 +15,15 @@
         <title>Zmoniu sarasas</title>
     </head>
     <body>
+    <%
+      String userName = "";
+      if(session.getAttribute("userName")==null)
+      {
+        response.sendRedirect("login.jsp");
+      } else {
+        userName = (String) session.getAttribute("userName");
+      }%>
+
     <div id="mySidenav" class="sidenav" >
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
           <img src="img/cancel.png" alt="Cancel" width="30" height="32">
@@ -52,9 +61,18 @@
          </div>
     </div>
        <div class="menutop">
-          <div><input type="image" onclick="openNav()" src="img/menu.png" alt="Open menu" width="40" height="42"><div>
-          <div>Open Menu</div>
+           <div class="columns">
+               <div><input type="image" onclick="openNav()" src="img/menu.png" alt="Open menu" width="40" height="42"></div>
+               <div>Open Menu</div>
+           </div>
+           <div class="columns">
+               <form action="logout" method="post">
+               <div><input type="image" onclick="logout()" src="img/logout.png" alt="Logout" width="40" height="42"></div>
+               </form>
+               <div>Logout <%= userName%></div>
+           </div>
        </div>
+
        <div class="menu">
         <table class="lentele">
          <thead>

@@ -14,9 +14,13 @@
         <title>Zmogus edit</title>
     </head>
     <body>
-    <%     int id = 0;
-           SaugumoPatikrinimas saugumop = new SaugumoPatikrinimas("idpatikrinimas", request);
-           if (saugumop.Atsakymas()){
+    <%
+          if(session.getAttribute("userName")==null) {
+              response.sendRedirect("login.jsp");
+          }
+          int id = 0;
+          SaugumoPatikrinimas saugumop = new SaugumoPatikrinimas("idpatikrinimas", request);
+          if (saugumop.Atsakymas()){
               id = Integer.parseInt(request.getParameter("id"));
               Zmogus zmogus = ZmogusRepo.getById(id);
              %>
