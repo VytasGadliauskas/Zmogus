@@ -13,45 +13,44 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @WebServlet(name = "Login", urlPatterns = {"/login"})
-public class Login extends HttpServlet{
+public class Login extends HttpServlet {
 
-    public Login() {}
+    public Login() {
+    }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userName = null;
         String password = null;
-        if (request.getParameter("username") != null) {
+        String page = "login.jsp?msg=invalid";
+        if (request.getParameter("username") != null && request.getParameter("password") != null) {
             userName = request.getParameter("username").trim();
-        }
-        if (request.getParameter("password") != null) {
             password = request.getParameter("password").trim();
-        }
-
-        HttpSession session=request.getSession();
-        session.setAttribute("userName", userName);
-
-        Connection conn = (Connection) request.getAttribute("conn");
-        if(conn != null ) {
-            try (PreparedStatement preparedStatement = conn.prepareStatement(
-                    "SELECT password FROM Vartotojai WHERE `username`= ?;")) {
-                preparedStatement.setString(1, userName);
-                ResultSet rs = preparedStatement.executeQuery();
-                while(rs.next()) {
-                    if(password.equals("1234"))
-                    {
-                        response.sendRedirect("index.jsp");
+            HttpSession session = request.getSession();
+            session.setAttribute("userName", userName);
+            Connection conn = (Connection) request.getAttribute("conn");
+            if (conn != null) {
+                try (PreparedStatement preparedStatement = conn.prepareStatement(
+                        "SELECT password, role FROM Vartotojai WHERE `username`= ?;")) {
+                    preparedStatement.setString(1, userName);
+                    ResultSet rs = preparedStatement.executeQuery();
+                    while (rs.next()) {
+                        if (PasswordEncryptDecrypt.encryptString(password).equals(rs.getString("password"))) {
+                            session.setAttribute("userName", userName);
+                            int role = rs.getInt("role");
+                            session.setAttribute("roleName", role);
+                            page = "index.jsp";
+                        } else {
+                            page = "login.jsp?msg=invalid";
+                        }
                     }
-                    else
-                    {
-                        response.sendRedirect("login.jsp?msg=invalid");
-                    }
+                    rs.close();
+                } catch (SQLException e) {
+                    page = "login.jsp?msg=invalid";
                 }
-                rs.close();
-            } catch (SQLException e) {
-                response.sendRedirect("klaida.jsp");
+            } else {
+                System.out.println("conn = null");
             }
         }
-        response.sendRedirect("klaida.jsp");
+        response.sendRedirect(page);
     }
 }

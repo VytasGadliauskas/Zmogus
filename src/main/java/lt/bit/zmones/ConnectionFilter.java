@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-@WebFilter(filterName = "ConnectionFilter", urlPatterns = {"/login.jsp"})
+@WebFilter(filterName = "ConnectionFilter", urlPatterns = {"/login"})
 public class ConnectionFilter implements Filter {
     private static final String URL = "jdbc:mysql://localhost:3306/Adresu_knyga";
     private static final String USER = "user";

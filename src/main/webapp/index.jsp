@@ -17,10 +17,12 @@
     <body>
     <%
       String userName = "";
+      int roleName = 0;
       if(session.getAttribute("userName")==null)
       {
         response.sendRedirect("login.jsp");
       } else {
+        roleName = (Integer) session.getAttribute("roleName");
         userName = (String) session.getAttribute("userName");
       }%>
 
@@ -65,11 +67,28 @@
                <div><input type="image" onclick="openNav()" src="img/menu.png" alt="Open menu" width="40" height="42"></div>
                <div>Open Menu</div>
            </div>
+
+          <% if (roleName ==1) { %>
+           <div class="columns">
+                <form action="adminSettings" method="post">
+                <div><input type="image" src="img/admin-settings.png" alt="Admin Settings" width="40" height="42"></div>
+                </form>
+                <div>Nustatymai role: <%= userName%></div>
+           </div>
+           <% } %>
+
+           <div class="columns">
+                 <form action="settings" method="post">
+                 <div><input type="image" src="img/settings.png" alt="Settings" width="40" height="42"></div>
+                 </form>
+                 <div>Nustatymai</div>
+           </div>
+
            <div class="columns">
                <form action="logout" method="post">
-               <div><input type="image" onclick="logout()" src="img/logout.png" alt="Logout" width="40" height="42"></div>
+               <div><input type="image" src="img/logout.png" alt="Logout" width="40" height="42"></div>
                </form>
-               <div>Logout <%= userName%></div>
+               <div>Logout: <%= userName%></div>
            </div>
        </div>
 

@@ -8,7 +8,6 @@ public class Testamas {
       Adresas adresas = AdresasRepo.getById(3);
       System.out.println(adresas);
 
-
     }
 
 }
