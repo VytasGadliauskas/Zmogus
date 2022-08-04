@@ -23,18 +23,13 @@ public class AuthFilter implements Filter {
         ALLOWED_PATHS.add("/zmones_web/logout");
         ALLOWED_PATHS.add("/zmones_web/login.jsp");
 
-
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         String uriPath = httpRequest.getRequestURI();
-
-        System.out.println("------ "+ uriPath);
-        System.out.println(httpRequest.getSession(false) +" " +ALLOWED_PATHS.contains(uriPath));
 
         if (httpRequest.getSession(false) != null) {
             if (httpRequest.getSession(false).getAttribute("userName") == null) {
                 if(!ALLOWED_PATHS.contains(uriPath)) {
                     HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
-                    System.out.println("username=null " + uriPath);
                     httpResponse.sendRedirect("/zmones_web/login.jsp");
                 } else {
                     filterChain.doFilter(servletRequest, servletResponse);
@@ -45,7 +40,6 @@ public class AuthFilter implements Filter {
         } else {
            if(!ALLOWED_PATHS.contains(uriPath)) {
                HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
-               System.out.println("sesija=null " + uriPath);
                httpResponse.sendRedirect("/zmones_web/login.jsp");
            } else {
                filterChain.doFilter(servletRequest, servletResponse);

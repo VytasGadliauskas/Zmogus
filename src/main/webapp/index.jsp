@@ -11,7 +11,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script src="js/script.js"></script>
         <title>Zmoniu sarasas</title>
     </head>
     <body>
@@ -67,17 +66,13 @@
 
           <% if (roleName ==1) { %>
            <div class="columns">
-                <form action="adminSettings" method="post">
-                <div><input type="image" src="img/admin-settings.png" alt="Admin Settings" width="40" height="42"></div>
-                </form>
+                <div><input type="image" onclick="showAdminNustatymai()" src="img/admin-settings.png" alt="Admin Settings" width="40" height="42"></div>
                 <div>Nustatymai role: <%= userName%></div>
            </div>
            <% } %>
 
            <div class="columns">
-                 <form action="settings" method="post">
-                 <div><input type="image" src="img/settings.png" alt="Settings" width="40" height="42"></div>
-                 </form>
+                 <div><input type="image" onclick="showNustatymai()" src="img/settings.png" alt="Settings" width="40" height="42"></div>
                  <div>Nustatymai</div>
            </div>
 
@@ -212,6 +207,51 @@
              <a href="index.jsp"><img src="img/refresh.png" alt="Refresh" width="45" height="45"></a>
         </div>
 
+
+        <!------------------------------------------ Modal langas Nustatymai -->
+        <div id="myModalNustatymai" class="modal">
+          <div id="modal-content-Nustatymai" class="modal-content">
+            <span class="closeNustatymai">&times;</span>
+              <div>
+                 <h3>Nustatymai</h3>
+                 <div class="login">
+                    <form action="ChangePasswd" method="POST">
+                       <input type="hidden" name="username"><br>
+                       <label for="oldpassword">Senas Slaptazodis:</label><input type="password" name="oldpassword"><br>
+                       <label for="newpassword1">Naujas Slaptazodis:</label><input type="password" name="newpassword1"><br>
+                       <label for="newpassword2">Pakartoti Slaptazodi:</label><input type="password" name="newpassword2"><br>
+                       <input type="image" src="img/ok.png" alt="Ok" width="48" height="48">
+                    </form>
+                  </div>
+                 <p>Fonai:</p>
+                 <div class="footer-fonai">
+                       <img onclick="setFonas('img/fonas/1.jpg')" src="img/fonas/1.jpg" alt="fonas1" width="60" height="60">
+                       <img onclick="setFonas('img/fonas/2.jpg')" src="img/fonas/2.jpg" alt="fonas2" width="60" height="60">
+                       <img onclick="setFonas('img/fonas/3.jpg')" src="img/fonas/3.jpg" alt="fonas3" width="60" height="60">
+                       <img onclick="setFonas('img/fonas/4.jpg')" src="img/fonas/4.jpg" alt="fonas4" width="60" height="60">
+                       <img onclick="setFonas('img/fonas/5.jpg')" src="img/fonas/5.jpg" alt="fonas5" width="60" height="60">
+                       <img onclick="setFonas('img/fonas/6.jpg')" src="img/fonas/6.jpg" alt="fonas6" width="60" height="60">
+                       <img onclick="setFonas('img/fonas/7.jpg')" src="img/fonas/7.jpg" alt="fonas7" width="60" height="60">
+                   </div>
+              </div>
+          </div>
+        </div>
+
+         <!------------------------------------------ Modal langas Admin Nustatymai -->
+                <div id="myModalAdminNustatymai" class="modal">
+                  <div id="modal-content-AdminNustatymai" class="modal-content">
+                    <span class="closeAdminNustatymai">&times;</span>
+                      <div>
+                         <h3>Admin Nustatymai</h3>
+                         <p>Vartotojai:</p>
+                         <div class="footer-fonai">
+
+                         </div>
+                      </div>
+                  </div>
+                </div>
+
+        <script src="js/script.js"></script>
         <script>
         function openNav() {
           document.getElementById("mySidenav").style.width = "400px";
