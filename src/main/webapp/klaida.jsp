@@ -9,9 +9,6 @@
         <title>Klaida</title>
     </head>
     <body>
-     <% if(session.getAttribute("userName")==null) {
-            response.sendRedirect("login.jsp");
-        } %>
            <div class="klaida">
                <h2 > Neteisingi duomenys </h2>
                <div class="edit"><p> !!! </p></div>

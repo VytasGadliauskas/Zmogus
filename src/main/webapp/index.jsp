@@ -18,10 +18,7 @@
     <%
       String userName = "";
       int roleName = 0;
-      if(session.getAttribute("userName")==null)
-      {
-        response.sendRedirect("login.jsp");
-      } else {
+      if(session.getAttribute("userName")!=null){
         roleName = (Integer) session.getAttribute("roleName");
         userName = (String) session.getAttribute("userName");
       }%>

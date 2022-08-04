@@ -18,9 +18,6 @@
     </head>
     <body>
     <%
-      if(session.getAttribute("userName")==null) {
-         response.sendRedirect("login.jsp");
-      }
       int id = 0;
       int kid = 0;
       SaugumoPatikrinimas saugumop = new SaugumoPatikrinimas("idpatikrinimas", request);

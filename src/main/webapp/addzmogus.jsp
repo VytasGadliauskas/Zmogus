@@ -13,11 +13,6 @@
         <title>Zmoniu sarasas</title>
     </head>
     <body>
-       <% if(session.getAttribute("userName")==null)
-            {
-              response.sendRedirect("login.jsp");
-            }%>
-
        <div class="menu">
           <div class="add">
             <form action="addZmogus" method="POST">
