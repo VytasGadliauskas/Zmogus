@@ -26,20 +26,16 @@
 //////////////////////////////////////// Isvaizdos Temos
 
 function setCSS(css_failas) {
-  document.cookie = `todo_css_file=${css_failas}; expires=${new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()}; path=/`;
-  window.location.reload();
+  // document.cookie = `todo_css_file=${css_failas}; expires=${new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()}; path=/`;
+  // window.location.reload();
 }
 
 function setFonas(fonas) {
-  document.cookie = `todo_fono_file=${fonas}; expires=${new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()}; path=/`;
+  // document.cookie = `todo_fono_file=${fonas}; expires=${new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()}; path=/`;
   document.body.style.backgroundImage = `url('${fonas}')`;
   document.body.style.color = 'white';
-  let modalAddFonas = document.getElementById('modal-content-Add');
-  modalAddFonas.style.backgroundImage = `url('${fonas}')`;
-  let modalEditFonas = document.getElementById('modal-content-Edit');
-  modalEditFonas.style.backgroundImage = `url('${fonas}')`;
   let modalNustatymaiFonas = document.getElementById('modal-content-Nustatymai');
   modalNustatymaiFonas.style.backgroundImage = `url('${fonas}')`;
   let modalAdminNustatymaiFonas = document.getElementById('modal-content-AdminNustatymai');
-  modalAboutFonas.style.backgroundImage = `url('${fonas}')`;
+  modalAdminNustatymaiFonas.style.backgroundImage = `url('${fonas}')`;
 }

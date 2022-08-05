@@ -9,19 +9,19 @@ import java.util.ArrayList;
 
 @WebFilter(filterName = "AuthFilter", urlPatterns = {"/*"})
 public class AuthFilter implements Filter {
+    ArrayList<String> ALLOWED_PATHS = new ArrayList<>();
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
-
-    @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        ArrayList<String> ALLOWED_PATHS = new ArrayList<>();
-        ALLOWED_PATHS.add("/zmones_web/");
+       // ALLOWED_PATHS.add("/zmones_web/");
         ALLOWED_PATHS.add("/zmones_web/css/style.css");
         ALLOWED_PATHS.add("/zmones_web/login");
         ALLOWED_PATHS.add("/zmones_web/logout");
         ALLOWED_PATHS.add("/zmones_web/login.jsp");
+    }
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         String uriPath = httpRequest.getRequestURI();
@@ -45,7 +45,6 @@ public class AuthFilter implements Filter {
                filterChain.doFilter(servletRequest, servletResponse);
            }
         }
-
     }
 
     @Override
