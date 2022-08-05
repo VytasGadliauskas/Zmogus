@@ -1,4 +1,4 @@
-package lt.bit.zmones;
+package lt.bit.zmones.data;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

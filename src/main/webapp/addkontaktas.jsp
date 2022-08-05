@@ -1,8 +1,8 @@
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="lt.bit.zmones.Zmogus"%>
-<%@page import="lt.bit.zmones.Kontaktas"%>
-<%@page import="lt.bit.zmones.KontaktasRepo"%>
+<%@page import="lt.bit.zmones.data.Zmogus"%>
+<%@page import="lt.bit.zmones.data.Kontaktas"%>
+<%@page import="lt.bit.zmones.data.KontaktasRepo"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

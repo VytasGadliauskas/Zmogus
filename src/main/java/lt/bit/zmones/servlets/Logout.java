@@ -1,4 +1,4 @@
-package lt.bit.zmones;
+package lt.bit.zmones.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,4 +1,4 @@
-package lt.bit.zmones;
+package lt.bit.zmones.data;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="lt.bit.zmones.Zmogus"%>
-<%@page import="lt.bit.zmones.Db"%>
+<%@page import="lt.bit.zmones.data.Zmogus"%>
+<%@page import="lt.bit.zmones.data.Db"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

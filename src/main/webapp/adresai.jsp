@@ -1,10 +1,10 @@
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="lt.bit.zmones.Zmogus"%>
-<%@page import="lt.bit.zmones.ZmogusRepo"%>
-<%@page import="lt.bit.zmones.Adresas"%>
-<%@page import="lt.bit.zmones.AdresasRepo"%>
-<%@page import="lt.bit.zmones.SaugumoPatikrinimas"%>
+<%@page import="lt.bit.zmones.data.Zmogus"%>
+<%@page import="lt.bit.zmones.data.ZmogusRepo"%>
+<%@page import="lt.bit.zmones.data.Adresas"%>
+<%@page import="lt.bit.zmones.data.AdresasRepo"%>
+<%@page import="lt.bit.zmones.components.SaugumoPatikrinimas"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

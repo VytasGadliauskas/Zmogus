@@ -1,4 +1,4 @@
-package lt.bit.zmones;
+package lt.bit.zmones.data;
 
 import java.sql.*;
 import java.util.ArrayList;

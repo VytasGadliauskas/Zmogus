@@ -1,19 +1,18 @@
-package lt.bit.zmones;
+package lt.bit.zmones.servlets;
 
+import lt.bit.zmones.components.SaugumoPatikrinimas;
+import lt.bit.zmones.data.Adresas;
+import lt.bit.zmones.data.AdresasRepo;
 
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-@WebServlet(name = "ZmogusEdit", urlPatterns = {"/editZmogus"})
-public class ZmogusEdit extends HttpServlet {
+@WebServlet(name = "AdresasEdit", urlPatterns = {"/editAdresas"})
+public class AdresasEdit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -26,44 +25,35 @@ public class ZmogusEdit extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SaugumoPatikrinimas saugumoPatikrinimas = new SaugumoPatikrinimas("zmogusadd", request);
+
+        SaugumoPatikrinimas saugumoPatikrinimas = new SaugumoPatikrinimas("adresasedit", request);
         if (saugumoPatikrinimas.Atsakymas()) {
-            String ids = request.getParameter("id");
+            String zmogaus_ids = request.getParameter("id");
+            String adreso_ids = request.getParameter("aid");
+            String valstybe = request.getParameter("valstybe").trim();
+            String miestas = request.getParameter("miestas").trim();
+            String adrsas = request.getParameter("adresas").trim();
+            String pastokodas = request.getParameter("pastokodas").trim();
             try {
-                int id = Integer.parseInt(ids);
-                Zmogus z = ZmogusRepo.getById(id);
-                if (z != null) {
-                    if (!"".equals(request.getParameter("vardas")) && !"".equals(request.getParameter("pavarde"))) {
-                        String vardas = request.getParameter("vardas");
-                        z.setVardas(vardas);
-                        String pavarde = request.getParameter("pavarde");
-                        z.setPavarde(pavarde);
-                        if (!"".equals(request.getParameter("gdata"))) {
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                            try {
-                                Date gimimoData = sdf.parse(request.getParameter("gdata"));
-                                z.setGimimoData(gimimoData);
-                            } catch (ParseException e) {
-                                response.sendRedirect("klaida.jsp");
-                            }
-                        }
-                        if (!"".equals(request.getParameter("alga"))) {
-                            BigDecimal alga = new BigDecimal(request.getParameter("alga"));
-                            z.setAlga(alga);
-                        }
-                        ZmogusRepo.updateZmogus(z);
-                        response.sendRedirect("index.jsp");
-                    } else {
-                        response.sendRedirect("index.jsp");
-                    }
+                int adreso_id = Integer.parseInt(adreso_ids);
+                Adresas a = AdresasRepo.getById(adreso_id);
+                if (a != null) {
+                            a.setValstybe(valstybe);
+                            a.setMiestas(miestas);
+                            a.setAdresas(adrsas);
+                            a.setPastoKodas(pastokodas);
+                            AdresasRepo.updateAdresas(a);
                 }
             } catch (Exception ex) {
-                // ignore
+                response.sendRedirect("klaida.jsp");
+            } finally {
+                response.sendRedirect("adresai.jsp?id=" + zmogaus_ids);
             }
         } else {
             response.sendRedirect("klaida.jsp");
         }
     }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 

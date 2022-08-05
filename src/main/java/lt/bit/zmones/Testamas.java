@@ -1,7 +1,7 @@
 package lt.bit.zmones;
 
-import java.util.ArrayList;
-import java.util.List;
+import lt.bit.zmones.data.Adresas;
+import lt.bit.zmones.data.AdresasRepo;
 
 public class Testamas {
     public static void main(String[] args) {

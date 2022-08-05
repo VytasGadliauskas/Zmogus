@@ -1,15 +1,23 @@
-package lt.bit.zmones;
+package lt.bit.zmones.servlets;
 
-import java.io.IOException;
-import java.util.List;
+
+import lt.bit.zmones.components.SaugumoPatikrinimas;
+import lt.bit.zmones.data.Zmogus;
+import lt.bit.zmones.data.ZmogusRepo;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-@WebServlet(name = "KontaktasEdit", urlPatterns = {"/editKontaktas"})
-public class KontaktasEdit extends HttpServlet {
+@WebServlet(name = "ZmogusEdit", urlPatterns = {"/editZmogus"})
+public class ZmogusEdit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -22,26 +30,39 @@ public class KontaktasEdit extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SaugumoPatikrinimas saugumoPatikrinimas = new SaugumoPatikrinimas("kontaktasedit", request);
+        SaugumoPatikrinimas saugumoPatikrinimas = new SaugumoPatikrinimas("zmogusadd", request);
         if (saugumoPatikrinimas.Atsakymas()) {
-            String zmogaus_ids = request.getParameter("id");
-            String kids = request.getParameter("kid");
-            String tipas = request.getParameter("tipas").trim();
-            String reiksme = request.getParameter("reiksme").trim();
+            String ids = request.getParameter("id");
             try {
-                int kid = Integer.parseInt(kids);
-                Kontaktas k = KontaktasRepo.getById(kid);
-                if (k != null) {
-                    if (!"".equals(tipas) && !"".equals(reiksme)) {
-                        k.setTipas(tipas);
-                        k.setReiksme(reiksme);
-                        KontaktasRepo.updateKontaktas(k);
+                int id = Integer.parseInt(ids);
+                Zmogus z = ZmogusRepo.getById(id);
+                if (z != null) {
+                    if (!"".equals(request.getParameter("vardas")) && !"".equals(request.getParameter("pavarde"))) {
+                        String vardas = request.getParameter("vardas");
+                        z.setVardas(vardas);
+                        String pavarde = request.getParameter("pavarde");
+                        z.setPavarde(pavarde);
+                        if (!"".equals(request.getParameter("gdata"))) {
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                            try {
+                                Date gimimoData = sdf.parse(request.getParameter("gdata"));
+                                z.setGimimoData(gimimoData);
+                            } catch (ParseException e) {
+                                response.sendRedirect("klaida.jsp");
+                            }
+                        }
+                        if (!"".equals(request.getParameter("alga"))) {
+                            BigDecimal alga = new BigDecimal(request.getParameter("alga"));
+                            z.setAlga(alga);
+                        }
+                        ZmogusRepo.updateZmogus(z);
+                        response.sendRedirect("index.jsp");
+                    } else {
+                        response.sendRedirect("index.jsp");
                     }
                 }
             } catch (Exception ex) {
                 // ignore
-            } finally {
-                response.sendRedirect("kontaktai.jsp?id=" + zmogaus_ids);
             }
         } else {
             response.sendRedirect("klaida.jsp");

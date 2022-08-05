@@ -1,15 +1,15 @@
-package lt.bit.zmones;
+package lt.bit.zmones.servlets;
+
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "AdresasAdd", urlPatterns = {"/addAdresas"})
-public class AdresasAdd extends HttpServlet {
+@WebServlet(name = "ZmogusFind", urlPatterns = {"/findZmogus"})
+public class ZmogusFind extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -22,30 +22,12 @@ public class AdresasAdd extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        SaugumoPatikrinimas saugumoPatikrinimas = new SaugumoPatikrinimas("adresasadd", request);
-        if (saugumoPatikrinimas.Atsakymas()) {
-
-            String zmogaus_ids = request.getParameter("id");
-            String valstybe = request.getParameter("valstybe").trim();
-            String miestas = request.getParameter("miestas").trim();
-            String adresasp = request.getParameter("adresas").trim();
-            String pastokodas = request.getParameter("pastokodas").trim();
-
-            try {
-                int zmogaus_id = Integer.parseInt(zmogaus_ids);
-                Zmogus z = ZmogusRepo.getById(zmogaus_id);
-                if (z != null) {
-                    Adresas adresas = new Adresas(zmogaus_id, adresasp, miestas, pastokodas, valstybe);
-                    AdresasRepo.addAdresas(adresas);
-                }
-            } catch (Exception ex) {
-                response.sendRedirect("klaida.jsp");
-            } finally {
-                response.sendRedirect("adresai.jsp?id=" + zmogaus_ids);
-            }
+        if(!"".equals(request.getParameter("vardas")) && !"".equals(request.getParameter("pavarde"))){
+            String vardas = request.getParameter("vardas");
+            String pavarde = request.getParameter("pavarde");
+            response.sendRedirect("index.jsp?filterVardas="+vardas+"&filterPavarde="+pavarde);
         } else {
-            response.sendRedirect("klaida.jsp");
+            response.sendRedirect("index.jsp");
         }
     }
 

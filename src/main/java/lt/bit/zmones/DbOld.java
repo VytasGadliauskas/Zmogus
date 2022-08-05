@@ -1,8 +1,9 @@
 package lt.bit.zmones;
 
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import lt.bit.zmones.data.Adresas;
+import lt.bit.zmones.data.Kontaktas;
+import lt.bit.zmones.data.Zmogus;
+
 import java.util.*;
 
 public class DbOld {

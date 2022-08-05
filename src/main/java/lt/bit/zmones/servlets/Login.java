@@ -1,4 +1,6 @@
-package lt.bit.zmones;
+package lt.bit.zmones.servlets;
+
+import lt.bit.zmones.components.PasswordEncryptDecrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +28,6 @@ public class Login extends HttpServlet {
             userName = request.getParameter("username").trim();
             password = request.getParameter("password").trim();
             HttpSession session = request.getSession();
-            session.setAttribute("userName", userName);
             Connection conn = (Connection) request.getAttribute("conn");
             if (conn != null) {
                 try (PreparedStatement preparedStatement = conn.prepareStatement(

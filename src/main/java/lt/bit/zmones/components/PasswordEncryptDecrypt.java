@@ -1,4 +1,4 @@
-package lt.bit.zmones;
+package lt.bit.zmones.components;
 
 //SHA-512 Hash
 

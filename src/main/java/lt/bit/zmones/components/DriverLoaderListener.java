@@ -1,4 +1,4 @@
-package lt.bit.zmones;
+package lt.bit.zmones.components;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

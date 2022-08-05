@@ -1,5 +1,10 @@
-package lt.bit.zmones;
+package lt.bit.zmones.servlets;
 
+import lt.bit.zmones.components.SaugumoPatikrinimas;
+import lt.bit.zmones.data.Kontaktas;
+import lt.bit.zmones.data.KontaktasRepo;
+import lt.bit.zmones.data.Zmogus;
+import lt.bit.zmones.data.ZmogusRepo;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ZmogusFind", urlPatterns = {"/findZmogus"})
-public class ZmogusFind extends HttpServlet {
+@WebServlet(name = "KontaktasAdd", urlPatterns = {"/addKontaktas"})
+public class KontaktasAdd extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -22,12 +27,27 @@ public class ZmogusFind extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(!"".equals(request.getParameter("vardas")) && !"".equals(request.getParameter("pavarde"))){
-            String vardas = request.getParameter("vardas");
-            String pavarde = request.getParameter("pavarde");
-            response.sendRedirect("index.jsp?filterVardas="+vardas+"&filterPavarde="+pavarde);
+        SaugumoPatikrinimas saugumoPatikrinimas = new SaugumoPatikrinimas("kontaktasadd", request);
+        if (saugumoPatikrinimas.Atsakymas()) {
+            String zmogaus_ids = request.getParameter("zmogaus_id");
+            String tipas = request.getParameter("tipas").trim();
+            String reiksme = request.getParameter("reiksme").trim();
+            try {
+                int zmogaus_id = Integer.parseInt(zmogaus_ids);
+                Zmogus z = ZmogusRepo.getById(zmogaus_id);
+                if (z != null) {
+                    if (!"".equals(tipas) && !"".equals(reiksme)) {
+                        Kontaktas kontaktas = new Kontaktas(zmogaus_id, tipas, reiksme);
+                        KontaktasRepo.addKontaktas(kontaktas);
+                    }
+                }
+            } catch (Exception ex) {
+                response.sendRedirect("klaida.jsp");
+            } finally {
+                response.sendRedirect("kontaktai.jsp?id=" + zmogaus_ids);
+            }
         } else {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("klaida.jsp");
         }
     }
 

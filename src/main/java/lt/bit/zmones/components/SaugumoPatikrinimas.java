@@ -1,4 +1,6 @@
-package lt.bit.zmones;
+package lt.bit.zmones.components;
+
+import lt.bit.zmones.data.*;
 
 import javax.servlet.http.HttpServletRequest;
 

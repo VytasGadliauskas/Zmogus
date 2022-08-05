@@ -1,4 +1,4 @@
-package lt.bit.zmones;
+package lt.bit.zmones.data;
 
 public class Adresas {
 

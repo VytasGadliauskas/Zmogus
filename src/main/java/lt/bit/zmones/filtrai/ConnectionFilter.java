@@ -1,4 +1,4 @@
-package lt.bit.zmones;
+package lt.bit.zmones.filtrai;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

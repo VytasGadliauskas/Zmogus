@@ -1,4 +1,8 @@
-package lt.bit.zmones;
+package lt.bit.zmones.servlets;
+
+import lt.bit.zmones.components.SaugumoPatikrinimas;
+import lt.bit.zmones.data.Kontaktas;
+import lt.bit.zmones.data.KontaktasRepo;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "KontaktasAdd", urlPatterns = {"/addKontaktas"})
-public class KontaktasAdd extends HttpServlet {
+@WebServlet(name = "KontaktasDelete", urlPatterns = {"/deleteKontaktas"})
+public class KontaktasDelete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -21,24 +25,21 @@ public class KontaktasAdd extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SaugumoPatikrinimas saugumoPatikrinimas = new SaugumoPatikrinimas("kontaktasadd", request);
+        SaugumoPatikrinimas saugumoPatikrinimas = new SaugumoPatikrinimas("kontaktasdelete", request);
         if (saugumoPatikrinimas.Atsakymas()) {
-            String zmogaus_ids = request.getParameter("zmogaus_id");
-            String tipas = request.getParameter("tipas").trim();
-            String reiksme = request.getParameter("reiksme").trim();
+            String ids = request.getParameter("id");
+            String kids = request.getParameter("kid");
             try {
-                int zmogaus_id = Integer.parseInt(zmogaus_ids);
-                Zmogus z = ZmogusRepo.getById(zmogaus_id);
-                if (z != null) {
-                    if (!"".equals(tipas) && !"".equals(reiksme)) {
-                        Kontaktas kontaktas = new Kontaktas(zmogaus_id, tipas, reiksme);
-                        KontaktasRepo.addKontaktas(kontaktas);
-                    }
+                int id = Integer.parseInt(ids);
+                int kid = Integer.parseInt(kids);
+                Kontaktas k = KontaktasRepo.getById(kid);
+                if (k != null) {
+                    KontaktasRepo.deleteKontaktas(k);
                 }
             } catch (Exception ex) {
                 response.sendRedirect("klaida.jsp");
             } finally {
-                response.sendRedirect("kontaktai.jsp?id=" + zmogaus_ids);
+                response.sendRedirect("kontaktai.jsp?id=" + ids);
             }
         } else {
             response.sendRedirect("klaida.jsp");
