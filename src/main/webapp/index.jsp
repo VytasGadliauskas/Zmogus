@@ -67,7 +67,7 @@
           <% if (roleName ==1) { %>
            <div class="columns">
                 <div><input type="image" onclick="showAdminNustatymai()" src="img/admin-settings.png" alt="Admin Settings" width="40" height="42"></div>
-                <div>Nustatymai role: <%= userName%></div>
+                <div>Administratoriaus nustatymai</div>
            </div>
            <% } %>
 
@@ -215,11 +215,11 @@
               <div>
                  <h3>Nustatymai</h3>
                  <div class="login">
-                    <form action="ChangePasswd" method="POST">
-                       <input type="hidden" name="username"><br>
-                       <label for="oldpassword">Senas Slaptazodis:</label><input type="password" name="oldpassword"><br>
-                       <label for="newpassword1">Naujas Slaptazodis:</label><input type="password" name="newpassword1"><br>
-                       <label for="newpassword2">Pakartoti Slaptazodi:</label><input type="password" name="newpassword2"><br>
+                    <form action="changePassword" method="POST">
+                       <input type="hidden" name="username" value=<%=userName%>><br>
+                       <label for="oldpassword">Senas Slaptazodis:</label><input type="password" name="oldpassword" required><br>
+                       <label for="newpassword">Naujas Slaptazodis:</label><input type="password" name="newpassword" required><br>
+                       <label for="newpassword2">Pakartoti Slaptazodi:</label><input type="password" name="newpassword2" required><br>
                        <input type="image" src="img/ok.png" alt="Ok" width="48" height="48">
                     </form>
                   </div>
